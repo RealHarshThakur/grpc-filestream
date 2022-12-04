@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "protos/stream";
+
+service FileStreamService {
+    rpc StreamFile(StreamFileRequest) returns (stream StreamFileResponse) {}
+}
+
+message StreamFileRequest {
+    string filename = 1;
+}
+
+message StreamFileResponse {
+    bytes chunk = 1;
+}
+
+
+// JobLogsService is the service that provides Job logs.
+service JobLogsService {
+    // GetJobLogs streams the logs of the given Job.
+    rpc GetJobLogs(GetJobLogsRequest) returns (stream GetJobLogsResponse) {}
+}
+
+// Job_name is the name of the Job.
+message GetJobLogsRequest {
+    string name = 1;
+    string namespace = 2;
+}
+
+// JobLogs is the logs of the Job.
+message GetJobLogsResponse {
+    string logs = 1;
+}

@@ -9,6 +9,11 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
+            "env":{
+                // "GRPC_GO_LOG_VERBOSITY_LEVEL":"99",
+                // "GRPC_GO_LOG_SEVERITY_LEVEL":"info",
+                "KUBECONFIG": "/Users/harshthakur/config"
+            },
             "program": "${fileDirname}"
         }
     ]
