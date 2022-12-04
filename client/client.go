@@ -22,9 +22,8 @@ func main() {
 	log := SetupLogging()
 	// Create a connection to the server
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithKeepaliveParams(keepalive.ClientParameters{
-		Time:                30 * time.Second, // client ping server if no activity for this long
-		Timeout:             20 * time.Second,
-		PermitWithoutStream: true,
+		Time:    30 * time.Second, // client ping server if no activity for this long
+		Timeout: 20 * time.Second,
 	}))
 	if err != nil {
 		log.Fatalf("Failed to connect: %v", err)
@@ -35,7 +34,6 @@ func main() {
 	c := pb.NewJobLogsServiceClient(conn)
 
 	// Send a request for the file
-	// filename := "myfile.txt"
 	ctx, cancel := context.WithTimeout(context.Background(), 180*time.Second)
 	defer cancel()
 	stream, err := c.GetJobLogs(ctx, &pb.GetJobLogsRequest{Name: "pi-with-ttl", Namespace: "default"})

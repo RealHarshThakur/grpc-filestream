@@ -4,18 +4,6 @@ package main;
 
 option go_package = "protos/stream";
 
-service FileStreamService {
-    rpc StreamFile(StreamFileRequest) returns (stream StreamFileResponse) {}
-}
-
-message StreamFileRequest {
-    string filename = 1;
-}
-
-message StreamFileResponse {
-    bytes chunk = 1;
-}
-
 
 // JobLogsService is the service that provides Job logs.
 service JobLogsService {
@@ -33,3 +21,18 @@ message GetJobLogsRequest {
 message GetJobLogsResponse {
     string logs = 1;
 }
+
+
+service FileStreamService {
+    rpc StreamFile(StreamFileRequest) returns (stream StreamFileResponse) {}
+}
+
+message StreamFileRequest {
+    string filename = 1;
+}
+
+message StreamFileResponse {
+    bytes chunk = 1;
+}
+
+
